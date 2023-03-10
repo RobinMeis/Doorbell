@@ -1,5 +1,3 @@
-unsigned long homeassistant_last_autodiscovery=0;
-
 void homeassistant_autodiscovery_device(JsonDocument &doc) {
   JsonObject device = doc.createNestedObject("device");
   JsonArray identifiers = device.createNestedArray("identifiers");
@@ -206,13 +204,6 @@ void homeassistant_autodiscovery() {
   homeassistant_autodiscovery_essid();
   homeassistant_autodiscovery_mac();
   homeassistant_autodiscovery_ip();
-}
-
-void homeassistant_loop() {
-  if (client.connected() && millis() - homeassistant_last_autodiscovery > HOMEASSISTANT_AUTODISCOVERY_INTERVAL) {
-    homeassistant_autodiscovery();
-    homeassistant_last_autodiscovery = millis();
-  }
 }
 
 void homeassistant_generate_topic(char *topic_variable, String component, String objectid) {

@@ -4,7 +4,7 @@
 #include <Preferences.h>
 #include "config.h"
 
-#define SW_VERSION "0.0.1"
+#define SW_VERSION "0.0.2"
 
 Preferences preferences;
 WiFiClient espClient;
