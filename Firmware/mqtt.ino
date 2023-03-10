@@ -1,4 +1,4 @@
-unsigned long mqtt_last_reconnect=0, last_heartbeat=0;
+unsigned long mqtt_last_reconnect=0;
 
 void mqtt_init() {
   client.setServer(MQTT_SERVER, MQTT_PORT);
@@ -19,7 +19,7 @@ void mqtt_reconnect() {
         client.subscribe(topic_control_doorbell_debounce_duration);
         client.subscribe(topic_control_reset_button);
 
-        mqtt_heartbeat();
+        mqtt_online();
         homeassistant_autodiscovery();
         doorbell_status();
         lock_status();
@@ -49,17 +49,12 @@ void mqtt_callback(char* topic, byte* payload, unsigned int length) {
 void mqtt_loop() {
   mqtt_reconnect();
   client.loop();
-
-  if (millis() - last_heartbeat > 1000) {
-    mqtt_heartbeat();
-    last_heartbeat = millis();
-  }
 }
 
 void mqtt_generate_topic(char *topic_variable, const String topic) {
   sprintf(topic_variable, "%s/%s", host_name.c_str(), topic.c_str());
 }
 
-void mqtt_heartbeat() {
-  client.publish(topic_availability, "online");
+void mqtt_online() {
+  client.publish(topic_availability, "online", true);
 }
