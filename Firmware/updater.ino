@@ -7,7 +7,7 @@
   ESP8266HTTPUpdateServer httpUpdater;
 
   void updater_init() {
-    httpUpdater.setup(&httpServer, HTTP_UPDATE_PATH, HTTP_UPDATE_USERNAME, HTTP_UPDATE_PASSWORD);
+    httpUpdater.setup(&httpServer, "/update", HTTP_UPDATE_USERNAME, HTTP_UPDATE_PASSWORD);
     httpServer.begin();
   }
 

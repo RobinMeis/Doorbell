@@ -16,7 +16,6 @@
 #define HTTP_UPDATE_ENABLED true
 #define HTTP_UPDATE_USERNAME "admin"
 #define HTTP_UPDATE_PASSWORD "admin"
-#define HTTP_UPDATE_PATH "/update"
 
 // Pins
 #define PIN_DOORBELL 1
